@@ -1,36 +1,94 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Propsoch Landing Page — Analysis & Rebuild
 
-## Getting Started
+Assignment implementation using **Next.js + TypeScript + Tailwind CSS**.
 
-First, run the development server:
+## Live Site Analyzed
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- URL: https://www.propsoch.com/
+- Audit method: Lighthouse CLI (mobile emulation)
+- Capture time (UTC): `2026-05-11T12:00:22`
+
+### 1) Lighthouse Scores (Current Site)
+
+| Category | Score |
+| --- | ---: |
+| Performance | 80 |
+| Accessibility | 96 |
+| Best Practices | 100 |
+| SEO | 100 |
+
+## 2) UX / UI Issues Found + Proposed Fixes
+
+| Area | Issue observed | Why it hurts UX | Proposed fix |
+| --- | --- | --- | --- |
+| Visual hierarchy / typography | Hero messaging is dense with several competing lines and weak visual grouping. | Important value proposition is harder to scan quickly. | Redesign hero with clear headline, concise supporting copy, strong CTAs, and clearer information blocks. |
+| Spacing & layout | Several sections feel crowded on smaller widths and long content blocks reduce readability. | Users must work harder to parse content and compare options. | Introduce consistent spacing scale, max-width constraints, grouped cards, and improved line lengths. |
+| Mobile responsiveness | Comparison-heavy content is difficult to scan on narrow screens. | Horizontal density makes decision info hard to consume on mobile. | Rebuild the comparison section with responsive table styling, better wrapping, and stronger row contrast. |
+| Performance | Large imagery and rich visual sections can increase load cost. | Slower first render, especially on mobile networks. | Use `next/image`, local optimized WebP assets, explicit dimensions, responsive `sizes`, and lazy loading for non-critical images. |
+| Accessibility | Some content patterns on the original experience can under-communicate structure for assistive tech. | Reduced clarity for keyboard and screen-reader users. | Improve semantic structure (headings, table caption), meaningful alt text, focus-visible states, and color contrast. |
+
+## 3) What I Rebuilt (Part 2)
+
+### Rebuilt sections
+
+1. **Hero section (redesigned)**  
+   New visual direction with clearer value proposition, stronger CTAs, trust stats, and improved contrast.
+2. **What makes us different (from original site)**  
+   Rebuilt as a responsive comparison table for better readability across screen sizes.
+3. **Guided Home Buying (from original site)**  
+   Reworked into structured benefits + outcome-oriented messaging.
+
+### Responsive design
+
+- Mobile-first layout with breakpoint-based grids (`md:`).
+- Improved spacing, readable line lengths, and touch-friendly CTA buttons.
+
+### Image optimization
+
+- Local optimized WebP assets in `public/images`.
+- All images rendered via `next/image`.
+- Explicit `width`/`height` + `sizes` hints.
+- Non-hero images load lazily by default.
+
+## Tech Decisions
+
+- **Next.js App Router** for straightforward page composition.
+- **TypeScript** for maintainable, safer structure.
+- **Tailwind CSS** for fast, consistent styling with responsive utilities.
+- Semantic HTML (sections, headings, table caption) to improve accessibility.
+
+## Project Structure
+
+```text
+my-propsoch-rebuild/
+├── README.md
+├── public/
+│   └── images/
+├── src/
+│   └── app/
+│       ├── globals.css
+│       ├── layout.tsx
+│       └── page.tsx
+└── tailwind/postcss config files
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Setup & Run
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm install
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Open: `http://localhost:3000`
 
-## Learn More
+Production commands:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run build
+npm run start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Submission Fields
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- GitHub Repository link: _add after pushing_
+- Deployed URL (Vercel/Netlify): _add after deployment_
