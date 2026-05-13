@@ -1,94 +1,138 @@
-# Propsoch Landing Page — Analysis & Rebuild
+# Frontend Engineering Assignment  
+## Propsoch Landing Page — Analysis & Rebuild
 
-Assignment implementation using **Next.js + TypeScript + Tailwind CSS**.
+**Live site analyzed:** https://www.propsoch.com/  
+**Tech stack used:** Next.js + TypeScript + Tailwind CSS  
+**Assignment timeline:** 2 days
 
-## Live Site Analyzed
+---
 
-- URL: https://www.propsoch.com/
-- Audit method: Lighthouse CLI (mobile emulation)
-- Capture time (UTC): `2026-05-11T12:00:22`
+## 1. Part 1 — Analysis (Structured)
 
-### 1) Lighthouse Scores (Current Site)
+### 1.1 Lighthouse audit (required 4 scores)
 
-| Category | Score |
-| --- | ---: |
-| Performance | 80 |
-| Accessibility | 96 |
-| Best Practices | 100 |
-| SEO | 100 |
+Audit mode used: **mobile**  
+Capture date: **2026-05-13**
 
-## 2) UX / UI Issues Found + Proposed Fixes
+| Site | Performance | Accessibility | Best Practices | SEO |
+| --- | ---: | ---: | ---: | ---: |
+| Live site (`https://www.propsoch.com/`) | 63 | 71 | 54 | 100 |
+| Rebuild (`http://localhost:3000`) | 100 | 96 | 100 | 100 |
 
-| Area | Issue observed | Why it hurts UX | Proposed fix |
-| --- | --- | --- | --- |
-| Visual hierarchy / typography | Hero messaging is dense with several competing lines and weak visual grouping. | Important value proposition is harder to scan quickly. | Redesign hero with clear headline, concise supporting copy, strong CTAs, and clearer information blocks. |
-| Spacing & layout | Several sections feel crowded on smaller widths and long content blocks reduce readability. | Users must work harder to parse content and compare options. | Introduce consistent spacing scale, max-width constraints, grouped cards, and improved line lengths. |
-| Mobile responsiveness | Comparison-heavy content is difficult to scan on narrow screens. | Horizontal density makes decision info hard to consume on mobile. | Rebuild the comparison section with responsive table styling, better wrapping, and stronger row contrast. |
-| Performance | Large imagery and rich visual sections can increase load cost. | Slower first render, especially on mobile networks. | Use `next/image`, local optimized WebP assets, explicit dimensions, responsive `sizes`, and lazy loading for non-critical images. |
-| Accessibility | Some content patterns on the original experience can under-communicate structure for assistive tech. | Reduced clarity for keyboard and screen-reader users. | Improve semantic structure (headings, table caption), meaningful alt text, focus-visible states, and color contrast. |
+**Screenshot placeholders (add your images in `my-propsoch-rebuild/screenshots/`):**
 
-## 3) What I Rebuilt (Part 2)
+![Live Lighthouse mobile report](screenshots/01-live-lighthouse-mobile.png)
+![Rebuild Lighthouse mobile report](screenshots/02-rebuild-lighthouse-mobile.png)
 
-### Rebuilt sections
+---
 
-1. **Hero section (redesigned)**  
-   New visual direction with clearer value proposition, stronger CTAs, trust stats, and improved contrast.
-2. **What makes us different (from original site)**  
-   Rebuilt as a responsive comparison table for better readability across screen sizes.
-3. **Guided Home Buying (from original site)**  
-   Reworked into structured benefits + outcome-oriented messaging.
+### 1.2 UX/UI issues found (5 required categories)
+
+| Category | Issue observed on live site | Why this hurts UX |
+| --- | --- | --- |
+| Visual / typography / color | Hero message feels dense and visually competing | Hard to understand the value proposition quickly |
+| Spacing & layout | Some sections feel crowded and text heavy | Lower readability and scan speed |
+| Mobile responsiveness | Comparison-heavy content is difficult to consume on small screens | Mobile users struggle to compare options |
+| Performance | Media-heavy sections can increase first load cost | Slower initial render on weaker networks/devices |
+| Accessibility | Structure and contrast cues are not equally strong everywhere | Reduced clarity for keyboard/screen-reader users |
+
+**Issue evidence screenshots (add images):**
+
+![Issue evidence - hero density](screenshots/03-issue-hero-density.png)
+![Issue evidence - spacing layout](screenshots/04-issue-spacing-layout.png)
+![Issue evidence - mobile comparison](screenshots/05-issue-mobile-responsiveness.png)
+![Issue evidence - performance signals](screenshots/06-issue-performance.png)
+![Issue evidence - accessibility](screenshots/07-issue-accessibility.png)
+
+---
+
+### 1.3 Proposed fixes (with reason)
+
+| Issue | Fix implemented | Why this fix |
+| --- | --- | --- |
+| Hero clarity | Redesigned hero with one strong headline, concise subcopy, clear CTAs | Improves first 3-second comprehension |
+| Layout density | Consistent spacing scale and cleaner section grouping | Better readability and visual rhythm |
+| Mobile comparison readability | Rebuilt comparison section with responsive table and wrapping | Easier decision-making on small screens |
+| Image/perf cost | `next/image`, WebP assets, explicit dimensions, responsive sizes, lazy loading | Faster loads and better Core Web Vitals |
+| Accessibility support | Semantic headings/sections, table caption, descriptive `alt`, visible focus states | Better keyboard + assistive technology support |
+
+---
+
+## 2. Part 2 — Build
+
+### Implemented sections
+1. **Hero section** — fully redesigned.
+2. **What makes us different** — rebuilt from original site.
+3. **Guided Home Buying** — rebuilt from original site.
 
 ### Responsive design
+- Mobile-first layout with desktop enhancement.
+- Works for narrow and wide viewports.
 
-- Mobile-first layout with breakpoint-based grids (`md:`).
-- Improved spacing, readable line lengths, and touch-friendly CTA buttons.
+### Optimized images
+- Assets in `public/images/*.webp`.
+- Served via Next.js `Image` with proper `sizes`.
+- Hero image prioritized; non-critical images lazy loaded.
 
-### Image optimization
+**Rebuild screenshots (add images):**
 
-- Local optimized WebP assets in `public/images`.
-- All images rendered via `next/image`.
-- Explicit `width`/`height` + `sizes` hints.
-- Non-hero images load lazily by default.
+![Rebuild hero desktop](screenshots/08-rebuild-hero-desktop.png)
+![Rebuild comparison section desktop](screenshots/09-rebuild-comparison-desktop.png)
+![Rebuild guided section desktop](screenshots/10-rebuild-guided-desktop.png)
+![Rebuild mobile full page](screenshots/11-rebuild-mobile-fullpage.png)
 
-## Tech Decisions
+---
 
-- **Next.js App Router** for straightforward page composition.
-- **TypeScript** for maintainable, safer structure.
-- **Tailwind CSS** for fast, consistent styling with responsive utilities.
-- Semantic HTML (sections, headings, table caption) to improve accessibility.
+## 3. Part 3 — README requirements
 
-## Project Structure
+### What improved and why
+- Major visual hierarchy improvement in hero section.
+- Better readability/scannability for comparison and guided sections.
+- Strong responsiveness and image optimization for performance.
+- Accessibility improvements in semantics and focus behavior.
 
-```text
-my-propsoch-rebuild/
-├── README.md
-├── public/
-│   └── images/
-├── src/
-│   └── app/
-│       ├── globals.css
-│       ├── layout.tsx
-│       └── page.tsx
-└── tailwind/postcss config files
-```
+### Tech decisions
+- **Next.js:** routing + image optimization + production build workflow.
+- **TypeScript:** safer, maintainable code.
+- **Tailwind CSS:** fast, consistent responsive UI implementation.
 
-## Setup & Run
-
+### Setup
 ```bash
 npm install
 npm run dev
 ```
 
-Open: `http://localhost:3000`
-
-Production commands:
-
+Production:
 ```bash
 npm run build
 npm run start
 ```
 
-## Submission Fields
+---
 
-- GitHub Repository link: _add after pushing_
-- Deployed URL (Vercel/Netlify): _add after deployment_
+## 4. Exactly which screenshots are required (and where to place them)
+
+Put all images in: **`my-propsoch-rebuild/screenshots/`**
+
+| File name to add | What to capture | Used in section |
+| --- | --- | --- |
+| `01-live-lighthouse-mobile.png` | Lighthouse report (live site mobile) showing all 4 category scores | 1.1 |
+| `02-rebuild-lighthouse-mobile.png` | Lighthouse report (rebuilt local/deployed site mobile) showing all 4 scores | 1.1 |
+| `03-issue-hero-density.png` | Live site hero area showing visual hierarchy issue | 1.2 |
+| `04-issue-spacing-layout.png` | Live site section showing spacing/layout issue | 1.2 |
+| `05-issue-mobile-responsiveness.png` | Live site mobile view showing responsiveness issue | 1.2 |
+| `06-issue-performance.png` | DevTools/Lighthouse evidence of performance concern | 1.2 |
+| `07-issue-accessibility.png` | Contrast/focus/semantics issue evidence from live site | 1.2 |
+| `08-rebuild-hero-desktop.png` | Your rebuilt hero section (desktop) | 2 |
+| `09-rebuild-comparison-desktop.png` | Rebuilt comparison section (desktop) | 2 |
+| `10-rebuild-guided-desktop.png` | Rebuilt guided section (desktop) | 2 |
+| `11-rebuild-mobile-fullpage.png` | Full rebuilt page in mobile viewport | 2 |
+| `12-before-after-comparison.png` *(optional)* | Side-by-side before/after comparison | Optional |
+
+---
+
+## Submission fields to fill before final submit
+
+- **GitHub repo link:** `<add your public repo URL>`
+- **Deployed site URL:** `<add your Vercel/Netlify URL>`
+
